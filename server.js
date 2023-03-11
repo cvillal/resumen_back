@@ -47,10 +47,24 @@ app.delete('/prduct/:id', (req, res) => {
     })
 })
 //create
-
+app.post('/product', (req, res) => {
+    ProductCard.create(req.body, (err, createdProdCard) => {
+        res.json(createdProdCard)
+    });
+})
 //read/index
-
+app.get('/product', (req, res) => {
+    ProductCard.find({}, (err, foundProdCard) => {
+        res.json(foundProdCard)
+    });
+})
 //update
+app.put('/product/:id', (req, res) => {
+    ProductCard.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedProdCard) => {
+        res.json(updatedProdCard)
+    });
+})
+
 
 app.listen(PORT, () => {
     console.log('listening on port:', PORT)
