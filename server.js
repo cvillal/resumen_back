@@ -36,22 +36,29 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 
 
 //test
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+//     res.send('Hello World!')
+// })
  
 //delete
 app.delete('/prduct/:id', (req, res) => {
-    ProductCard.findByIdAndRemove(req.params.id, (err, deletedProductCard) => {
-        res.json(deletedProductCard);
+    ProductCard.findByIdAndRemove(req.params.id, (err, deletedProdCard) => {
+        res.json(deletedProdCard);
     })
 })
 //create
+// app.post('/product', (req, res) => {
+//     ProductCard.create(req.body).then((err, createdProdCard) => {
+//         res.json(createdProdCard)
+//     });
+// })
+
 app.post('/product', (req, res) => {
     ProductCard.create(req.body, (err, createdProdCard) => {
         res.json(createdProdCard)
     });
 })
+
 //read/index
 app.get('/product', (req, res) => {
     ProductCard.find({}, (err, foundProdCard) => {
