@@ -10,7 +10,7 @@ const ProductCard = require('./models/product.js');
 //PORT//allows Heroku's port or own local port, depending on environment
 const PORT = process.env.PORT
 
-//this app is going to use:
+//MIDDLEWARE?this app is going to use:
 
 app.use(express.json());
 app.use(cors());
@@ -40,39 +40,8 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 //     res.send('Hello World!')
 // })
  
-//delete
-app.delete('/prduct/:id', (req, res) => {
-    ProductCard.findByIdAndRemove(req.params.id, (err, deletedProdCard) => {
-        res.json(deletedProdCard);
-    })
-})
-//create
-// app.post('/product', (req, res) => {
-//     ProductCard.create(req.body).then((err, createdProdCard) => {
-//         res.json(createdProdCard)
-//     });
-// })
 
-app.post('/product', (req, res) => {
-    ProductCard.create(req.body, (err, createdProdCard) => {
-        res.json(createdProdCard)
-    });
-})
-
-//read/index
-app.get('/product', (req, res) => {
-    ProductCard.find({}, (err, foundProdCard) => {
-        res.json(foundProdCard)
-    });
-})
-//update
-app.put('/product/:id', (req, res) => {
-    ProductCard.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedProdCard) => {
-        res.json(updatedProdCard)
-    });
-})
-
-
+//LISTEN ON PORT
 app.listen(PORT, () => {
     console.log('listening on port:', PORT)
 });
